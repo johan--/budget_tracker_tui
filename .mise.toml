@@ -1,0 +1,26 @@
+# mise tooling for local development/testing on Debian.
+# Pins the Rust toolchain so the build is reproducible.
+# Needs Rust >= 1.91 (locked libsqlite3-sys 0.38 uses the stabilized cfg_select!); edition 2024 needs >= 1.85.
+
+[tools]
+rust = { version = "1.96.0", components = "clippy,rustfmt" }
+
+[tasks.run]
+description = "Run the budget tracker TUI"
+run = "cargo run"
+
+[tasks.build]
+description = "Optimized release build"
+run = "cargo build --release"
+
+[tasks.test]
+description = "Run the test suite"
+run = "cargo test"
+
+[tasks.lint]
+description = "Clippy with warnings as errors (matches CI)"
+run = "cargo clippy -- -D warnings"
+
+[tasks.fmt]
+description = "Check formatting (matches CI)"
+run = "cargo fmt --check"
